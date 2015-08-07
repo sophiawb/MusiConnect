@@ -1,0 +1,14 @@
+{
+  "name": "banal-conga-line",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.js",
+  "repository": "",
+  "dependencies": {
+    "body-parser": "^1.5.2",
+    "express": "~4.0.0",
+    "mongoose": "^4.1.1",
+    "nodemon": "^1.2.1",
+    "passport": "^0.2.2"
+  }
+}
