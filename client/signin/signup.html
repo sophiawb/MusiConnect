@@ -1,0 +1,15 @@
+<loggedout></loggedout>
+
+<form class="signupform" ng-submit="signUp()">
+  Name: <input type="text" ng-model="user.name">
+  Email: <input type="text" ng-model="user.email">
+  Password: <input type="text" ng-model="user.password"> <!-- or whatever firebase needs -->
+  Location: <input type="text" ng-model="user.location">
+  Talents: <div class="talents" ng-repeat="talent in user.talents">
+    {{ talent.talent }}, {{ talent.level}}
+    </div>
+    <input ng-model="newTalent.talent" placeholder="Your talent"> 
+    <input ng-model="newTalent.level" placeholder="Your level">
+    <div class="addTalent" ng-click="addTalent()">ADD TALENT</div> 
+  <input type="submit" value="SIGN UP!!!">
+</form>
