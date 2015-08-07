@@ -42,13 +42,11 @@ angular.module('app.services', [])
         url: 'http://requestb.in/1h0kipc1', // route will be '/api/users' + uid 
       });
       // .then( set username in localstorage?); 
-    };
-
-    var post    
+    }; 
 
     var getRequests = function(uid) { // optional filter by username
       var url;
-      if (username !== undefined) {
+      if (!username) {
         url = 'api/requests/' + uid;
       } else {
         url = 'api/requests/';
@@ -69,13 +67,13 @@ angular.module('app.services', [])
           'Content-Type': 'text/json'
         }
       });
-    }
+    };
 
     return {
-      loginUser: loginUser
+      loginUser: loginUser,
       signupUser: signupUser,
       getUser: getUser,
       getRequests: getRequests,
       postRequest: postRequest
-    }
+    };
   }]);
