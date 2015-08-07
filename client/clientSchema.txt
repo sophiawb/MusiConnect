@@ -1,12 +1,11 @@
-index.html
-
 app folder:
+  index.html
   app.js 
     routing
     auth??? JWT? SESSIONS? LOCALSTORAGE?
   user
-    view
-    controller
+    x view
+    x controller
   request    
     view
     controller
@@ -16,7 +15,13 @@ app folder:
   login
     view
     controller
+  navbar
+    x loggedIn
+      x view
+      x controller
+    loggedOut
+      x view
   services
     HTTP Requests
-    AUTH
-    NAVBAR
+    AUTH???
+    x NAVBAR
