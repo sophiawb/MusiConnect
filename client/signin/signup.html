@@ -1,11 +1,11 @@
 <loggedout></loggedout>
 
 <form class="signupform" ng-submit="signUp()">
-  Name: <input type="text" ng-model="user.name">
-  Email: <input type="text" ng-model="user.email">
-  Password: <input type="text" ng-model="user.password"> <!-- or whatever firebase needs -->
+  Name: <input type="text" ng-model="user.name"> 
+  Email: <input type="text" ng-model="user.email"> <!-- TODO: check for e-mail format -->
+  Password: <input type="text" ng-model="user.password"> <!-- or whatever firebase needs TODO: hide password while typing-->
   Location: <input type="text" ng-model="user.location">
-  Talents: <div class="talents" ng-repeat="talent in user.talents">
+  Talents: <div class="talents" ng-repeat="talent in user.talents"> <!-- TODO: if you press enter, it submits the whole form but doesn't add the talent -->
     {{ talent.talent }}, {{ talent.level}}
     </div>
     <input ng-model="newTalent.talent" placeholder="Your talent"> 
