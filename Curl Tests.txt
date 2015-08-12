@@ -2,3 +2,7 @@ curl http://127.0.0.1:8000/api/user -XPOST -d"name=JaneDoe&username=Janedoe&uid=
 
 
 curl http://127.0.0.1:8000/api/user --data "name=JaneDoe"
+
+curl -X POST -d "name=JaneDoe&username=Janedoe&uid=01234ABC&email=janedoe@gmail.com" http://127.0.0.1:8000/api/user
+
+curl -X POST  -H "Accept: Application/json" -H "Content-Type: application/json" http://127.0.0.1:8000/api/user -d '{"name":"JaneDoe","username":"JaneDoe","uid":"01234ABC","email":"janedoe@gmail.com"}'
