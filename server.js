@@ -32,8 +32,8 @@ app.post('/api/user', function(req, res) {
   // receive user object
   // add it to database
   // respond with 304 - TODO: redirect here or client-side? 
-  var userObj = req.data;
-  console.log("============================>", req.body);
+  var userObj = req.body;
+  // console.log("============================>", req.body);
   db.addUser(userObj);
 });
 
@@ -50,7 +50,7 @@ app.post('/api/request', function(req, res){
   // receive req obj
   // return post it
   // return 304
-  var reqObj = req.data;
+  var reqObj = req.body;
   db.addrequest(reqObj);
 });
 

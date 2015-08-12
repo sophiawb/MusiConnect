@@ -74,7 +74,7 @@ var talents = {
 //   console.log(results);
 // })
 
-dbparse.getUID("0123ABC", function(results){
+dbparse.getUID("01234ABC", function(results){
   // if(err) console.log(err);
   console.log(results);
 })
