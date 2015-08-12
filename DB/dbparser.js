@@ -75,7 +75,7 @@ exports.addTalents = addTalents = function(usrname, talents, callback){
 
 //Adds request to database
 exports.addRequest = addRequest = function(requestData, callback){
-  var request = new Request(requestData);
+  var request = new rRquest(requestData);
   request.save(function(err, requestObj){
     if(err) console.log(err)
     else{
@@ -101,8 +101,6 @@ exports.toggleRequestTrue = toggleRequestTrue = function(request, callback){
   Request.update(request._id, {'active': true});
 }
 
-//TODO
-//Take in an object and filter by talents
 exports.getReqTalents = getReqTalents = function(talent, callback){
   //Get all users related to requested talent
   var query = {'talents': talent};
@@ -112,7 +110,6 @@ exports.getReqTalents = getReqTalents = function(talent, callback){
   })
 }
 
-//STILL TODO - Add email
 exports.parseReq = parseReq = function(request, callback){
   //Parses the request, and returns the users that meets the criteria
   var query = {
