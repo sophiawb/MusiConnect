@@ -35,9 +35,9 @@ var userSchema = mongoose.Schema({
   talents: { type: Object}
 });
 
-// userSchema.statics.findAllTalents = function(name, cb){
-//   return this.find({'name': name}, cb)
-// }
+userSchema.statics.findAllTalents = function(name, cb){
+  return this.find({'name': name}, cb)
+}
 
 var User = mongoose.model('User', userSchema);
 
