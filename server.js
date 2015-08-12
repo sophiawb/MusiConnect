@@ -43,7 +43,7 @@ app.get('/api/request', function(req, res){
   db.getRequests(function(requests){
     // console.log(requests);
     res.end(JSON.stringify(requests));
-  })
+  });
 });
 
 app.post('/api/request', function(req, res){

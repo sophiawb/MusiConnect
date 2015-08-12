@@ -18,6 +18,7 @@ app.run(["$rootScope", "$location", function($rootScope, $location) {
 app.config(function($routeProvider){
   var requireAuthResolve = {
     "currentAuth": ["Auth", function(Auth) {
+      console.log(Auth.auth);
       return Auth.auth.$requireAuth();
     }]
   };
@@ -39,7 +40,7 @@ app.config(function($routeProvider){
     })    
     .when('/login', {
       templateUrl: 'signin/login.html',
-      controller: 'signinContoller'
+      controller: 'signinController'
     })
     .otherwise({redirectTo: '/user/eliot'
     }); // should redirect to /user/currentUserName
