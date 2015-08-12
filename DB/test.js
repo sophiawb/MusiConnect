@@ -1,18 +1,21 @@
 var dbparse = require('./dbparser');
+var User = require('./user.js');
 /**
  * Testing
 **/
 // removeUser('Patrick');
 
-var patrick =  {
-  username: "Patrick",
-  password: "Test",
+var Johndoe =  {
+  name: "John Doe",
+  username: "Johndoe",
+  password: "Johndoe",
   location: "Oakland",
-  email: "Pavtran2@gmail.com"
+  uid: "0123ABC",
+  email: "JohnDoe@gmail.com"
 }
 
 // console.log(patrick);
-// addUser(patrick);
+// addUser(Johndoe);
 
 var talents = {
   'Piano': 5,
@@ -24,7 +27,7 @@ var talents = {
 //   console.log(results);
 // });
 // 
-// addTalents('Patrick', talents);
+// addTalents('Johndoe', talents);
 // removeUser({'username': 'Patrick'});
 
 // (User.find(function(err, results){
@@ -50,19 +53,28 @@ var talents = {
 //   console.log("People who can play the Piano" + results);
 // });
 
-var requestOne;
-// Request.findOne(function(err, results){
-//   requestOne = results;
-//   console.log(requestOne);
-//   parseReq(requestOne, function(results){
-//     console.log("People who meet the request criteria" + results);
-//   })
+// var requestOne;
+// // Request.findOne(function(err, results){
+// //   requestOne = results;
+// //   console.log(requestOne);
+// //   parseReq(requestOne, function(results){
+// //     console.log("People who meet the request criteria" + results);
+// //   })
 
-// });
-// console.log(requestOne);
-// parseReq(requestOne, function(results){
-//   console.log("People who meet the request criteria" + results);
+// // });
+// // console.log(requestOne);
+// // parseReq(requestOne, function(results){
+// //   console.log("People who meet the request criteria" + results);
+// // })
+// dbparse.getRequests(function(result){
+//   console.log(result);
 // })
-dbparse.getRequests(function(result){
-  console.log(result);
+
+// User.find(function(err, results){
+//   console.log(results);
+// })
+
+dbparse.getUID("0123ABC", function(results){
+  // if(err) console.log(err);
+  console.log(results);
 })

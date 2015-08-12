@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt-nodejs');
+// var bcrypt = require('bcrypt-nodejs');
 var bluebird = require('bluebird');
 var Request = require('./request');
 
@@ -28,7 +28,7 @@ var Request = require('./request');
 var userSchema = mongoose.Schema({
   name: { type: String, required: true},
   username: { type: String, required: true, index: { unique: true } },
-  uid: { type: String },
+  uid: { type: String, required: true },
   password: { type: String },
   location: { type: String },
   email: {type: String, index: { unique: true }},
@@ -41,21 +41,21 @@ var userSchema = mongoose.Schema({
 
 var User = mongoose.model('User', userSchema);
 
-User.comparePassword = function(candidatePassword, savedPassword, cb) {
-  bcrypt.compare(candidatePassword, savedPassword, function(err, isMatch) {
-    if (err) return cb(err);
-    cb(null, isMatch);
-  });
-};
+// User.comparePassword = function(candidatePassword, savedPassword, cb) {
+//   bcrypt.compare(candidatePassword, savedPassword, function(err, isMatch) {
+//     if (err) return cb(err);
+//     cb(null, isMatch);
+//   });
+// };
 
-userSchema.pre('save', function(next){
-  var cipher = bluebird.promisify(bcrypt.hash);
-  return cipher(this.password, null, null).bind(this)
-    .then(function(hash) {
-      this.password = hash;
-      next();
-    });
-});
+// userSchema.pre('save', function(next){
+//   var cipher = bluebird.promisify(bcrypt.hash);
+//   return cipher(this.password, null, null).bind(this)
+//     .then(function(hash) {
+//       this.password = hash;
+//       next();
+//     });
+// });
 
 User.getAllTalents = function(talent, callback){
 

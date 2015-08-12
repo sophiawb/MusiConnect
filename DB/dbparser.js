@@ -15,7 +15,7 @@ var Request = require('./request.js');
 *           Callback
 **/
 exports.addUser = addUser = function(userData, callback){
-  //Add new user to database
+  //Add new user to databasemove
   var user = new User(userData);
   user.save(function(err, userObj){
     if(err) console.log(err)
@@ -33,13 +33,20 @@ exports.addUser = addUser = function(userData, callback){
  *          Callback
 **/
 exports.removeUser = removeUser = function(usrname, callback){
-  username = parseUsername(usrname);
+  username = parseUsername(usrname);i
   User.remove({'username': username}, function(err){
     if(err){
       console.log(err);
       callback(err);
     }
   });
+}
+
+exports.getUID = getUID = function(uid, callback){
+  User.findOne({'uid': uid}, function(results, err){
+    if(err) console.log(err);
+    else callback(results);
+  })
 }
 
 
