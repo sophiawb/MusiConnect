@@ -19,6 +19,7 @@ angular.module('app.services', ['firebase'])
   .factory('Auth', ['$window', '$firebaseAuth',
     function($window,$firebaseAuth){
 
+      var firebaseAppUrl = 'https://banal-conga-line.firebaseio.com';
       var ref = new Firebase(firebaseAppUrl);
       var auth = $firebaseAuth(ref);
 
