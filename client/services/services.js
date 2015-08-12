@@ -16,13 +16,12 @@ angular.module('app.services', ['firebase'])
     };
   }])
 
-  .factory('Auth', ['$firebaseAuth',
-    function($firebaseAuth){
-      var firebaseAppUrl = "https://banal-conga-line.firebaseio.com";
+  .factory('Auth', ['$window', '$firebaseAuth',
+    function($window,$firebaseAuth){
+
+      var firebaseAppUrl = 'https://banal-conga-line.firebaseio.com';
       var ref = new Firebase(firebaseAppUrl);
       var auth = $firebaseAuth(ref);
-
-      console.log('services line 25', auth);
 
       var authData = null;
       var error = null;
@@ -31,13 +30,9 @@ angular.module('app.services', ['firebase'])
         return auth.$authWithPassword({// ??
           email: email,
           password: password
-        }).then(function(authData){
-          // Do something with authData.uid
-        }).catch(function(error){
-          console.error("Authentication failed:",error);
+        })
         });
       };
-
 
       var logout = function(){
         auth.$unAuth();
@@ -51,18 +46,28 @@ angular.module('app.services', ['firebase'])
           // user created with userData.id
         }).catch(function(error){
           console.log("Signup failed:",error);
-        });
+        })
+      };
+
+      var getUid = function(){
+        return $window.localStorage.getItem('uid');
+      };
+
+      var isAuth = function(){
+        return !!$window.localStorage.getItem('uid');
       };
 
       return {
-        // DECIDE WHAT TO RETURN FROM FACTORY!!!
         auth: auth,
         login: login,
         logout: logout,
-        signup: signup
+        signup: signup,
+        getUid: getUid,
+        isAuth: isAuth
       };
     }
   ])
+
   .factory('HttpRequests', ['$http', '$location', function($http, $location){
     var hostUrl = 'http://localhost:8000/api';
     
