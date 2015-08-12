@@ -43,8 +43,8 @@ exports.removeUser = removeUser = function(usrname, callback){
 }
 
 exports.getUID = getUID = function(uid, callback){
-  User.findOne({'uid': uid}, function(results, err){
-    if(err) console.log(err);
+  User.findOne({'uid': uid}, function(err, results){
+    if(err) console.log("47",err);
     else callback(results);
   })
 }

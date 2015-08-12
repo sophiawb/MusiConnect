@@ -23,8 +23,8 @@ app.get('/api/user/:UID', function(req, res){
   var UID = req.params.UID;
   // console.log(req.params.UID);
   db.getUID(UID, function(userData){
-    // console.log("26", userData);
-    res.end(userData);
+    console.log("26", userData);
+    res.end(JSON.stringify(userData));
   })
 });
 
