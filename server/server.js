@@ -13,7 +13,8 @@ var app = express();
 require('./middleware.js')(app, express); //TODO: make sure path to middleware is correct
 
 // Request handlers
-
+app.use(express.static('./client'));
+app.get('./api');
 
 
 
