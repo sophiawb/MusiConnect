@@ -129,6 +129,14 @@ exports.getRequests = getRequests = function(callback){
   });
 }
 
+exports.getUIDRequests = getUIDRequests = function(uid, callback){
+  var query = {'uid': uid};
+  Request.find(uid, function(err, results){
+    if(err) console.log(err);
+    else callback(results);
+  })
+}
+
 // var 
 
 
