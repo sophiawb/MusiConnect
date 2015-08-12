@@ -5,14 +5,14 @@ angular.module('app.services', [])
       restrict: 'AE',
       replace: true,
       templateUrl: 'nav/loggedinnav.html'
-    }
+    };
   }])
   .directive('loggedout', [function(){
     return {
       restrict: 'AE',
       replace: true,
       templateUrl: 'nav/loggedoutnav.html'
-    }
+    };
   }])
   .factory('HttpRequests', ['$http', '$location', function($http, $location){
     
