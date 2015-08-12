@@ -8,7 +8,7 @@
 
 <div ng-filter="search" ng-model="requests">
   <div class="requestlist" ng-repeat="request in requests | filter:{talent:talentfilter, level:levelfilter, location:locationfilter}">
-    <div class="username" > {{ request.username }} </div>
+    <div class="username" ng-href="/user/{{ request.uid }}"> {{ request.username }} </div>
     <div class="talent"> {{ request.talent }} </div>
     <div class="level"> {{ request.level }} </div>
     <div class="location"> {{ request.location }} </div>

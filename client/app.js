@@ -3,6 +3,7 @@ var app = angular.module('app', [
   'app.request',
   'app.user',
   'app.nav',
+  'app.signin',
   'ngRoute'
 ]);
 
@@ -15,8 +16,16 @@ app.config(function($routeProvider){
     .when('/requests', {
       templateUrl: 'request/requestView.html',
       controller: 'RequestController'
+    })    
+    .when('/signup', {
+      templateUrl: 'signin/signup.html',
+      controller: 'signinController'
+    })    
+    .when('/login', {
+      templateUrl: 'request/login.html',
+      controller: 'signinContoller'
     })
-    .otherwise({redirectTo: '/user/eliot'});
+    .otherwise({redirectTo: '/user/eliot'}); // should redirect to /user/currentUserName
 
   });
 

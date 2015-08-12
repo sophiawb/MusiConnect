@@ -1,12 +1,12 @@
 angular.module('app.user', [])
-.controller('UserController',['$scope', '$routeParams', '$http', 
-  function($scope, $routeParams, $http){
+.controller('UserController',['$scope', '$routeParams', 'HttpRequests',
+  function($scope, $routeParams, HttpRequests){
     $scope.user = {
       image: 'https://avatars3.githubusercontent.com/u/13667301?v=3&s=200',
       name: $routeParams.username,
       location: 'San Francisco',
       talents: [{ talent: 'trombone', level: 11}, {talent: 'guitar', level: 4}],
-      contact: 'develiot.com'
+      contact: 'develiot.com',
     };
 
     $scope.requests = [
@@ -16,9 +16,23 @@ angular.module('app.user', [])
     ];
 
     $scope.deleteRequest = function(index) {
-      $scope.requests[index] = 0; // TODO: this should run Requests.deleteRequest
+      HttpRequests.makeRequestInactive($scope.requests[index]._id);
+      $scope.requests[index] = 0; // TODO: this should run Requests.makeRequestInactive()
     };
 
-    // TODO: call to User.getUser( name: $routeParams.username)
-    // TODO: call to Request.getRequest( name: $routeParams.username)
+    // HttpRequests.getUser( 'uid' ) // TODO: how to get uid
+    //   .then(function(userData){
+    //     $scope.user = userData;
+    //   },
+    //   function(err){ 
+    //     console.log('error finding user', err);
+    //   });
+
+    // HttpRequests.getRequests( {name: $routeParams.username})
+    //   .then(function(data){
+    //     console.log('received requests', data);
+    //     $scope.requests = data;
+    //   }, function(err){
+    //     console.log('error getting requests', err);
+    //   });
 }]);
