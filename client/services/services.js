@@ -7,6 +7,7 @@ angular.module('app.services', ['firebase'])
       templateUrl: 'nav/loggedinnav.html'
     };
   }])
+
   .directive('loggedout', [function(){
     return {
       restrict: 'AE',
@@ -14,11 +15,14 @@ angular.module('app.services', ['firebase'])
       templateUrl: 'nav/loggedoutnav.html'
     };
   }])
+
   .factory('Auth', ['$firebaseAuth',
     function($firebaseAuth){
-
+      var firebaseAppUrl = "https://banal-conga-line.firebaseio.com";
       var ref = new Firebase(firebaseAppUrl);
       var auth = $firebaseAuth(ref);
+
+      console.log('services line 25', auth);
 
       var authData = null;
       var error = null;
@@ -47,7 +51,7 @@ angular.module('app.services', ['firebase'])
           // user created with userData.id
         }).catch(function(error){
           console.log("Signup failed:",error);
-        })
+        });
       };
 
       return {
@@ -58,19 +62,20 @@ angular.module('app.services', ['firebase'])
         signup: signup
       };
     }
-  ]);
+  ])
   .factory('HttpRequests', ['$http', '$location', function($http, $location){
+    var hostUrl = 'http://localhost:8000/api';
     
     var signupUser = function(userObject){
       // send to firebase
       // var uid = UID from firebase
-      console.log('user http request sent', userObject);
+      console.log('user http request sent', JSON.stringify(userObject));
       return $http({
         method: 'POST',
-        url: 'http://requestb.in/1h0kipc1',
-        data: userObject,
+        url: hostUrl + '/user',
+        data: JSON.stringify(userObject),
         headers: {
-          'Content-Type': 'text/json'
+          'Content-Type': 'application/json'
         }
       }); // route will be '/api/users' 
     };
@@ -82,9 +87,10 @@ angular.module('app.services', ['firebase'])
     };
 
     var getUser = function(uid) {
+      console.log(uid);
       return $http({
         method: 'GET',
-        url: 'http://requestb.in/1h0kipc1', // route will be '/api/users' + uid 
+        url: hostUrl + '/user/' + uid, // route will be '/api/users' + uid 
       });
       // .then( set username in localstorage?); 
     }; 
@@ -92,13 +98,13 @@ angular.module('app.services', ['firebase'])
     var getRequests = function(uid) { // optional filter by username
       var url;
       if (!username) {
-        url = 'api/requests/' + uid;
+        url = hostUrl + 'requests/' + uid;
       } else {
-        url = 'api/requests/';
+        url = hostUrl + 'requests';
       }
       return $http({
         method: 'GET',
-        url: url // route will be '/api/users' + uid 
+        url: hostUrl + '/request'
       });
     };
 
@@ -106,7 +112,7 @@ angular.module('app.services', ['firebase'])
       console.log('post request http request sent', request);
       return $http({
         method: 'POST',
-        url: 'http://requestb.in/1h0kipc1',
+        url: hostUrl + '/request',
         data: userObject,
         headers: {
           'Content-Type': 'text/json'

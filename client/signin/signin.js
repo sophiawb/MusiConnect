@@ -1,6 +1,6 @@
 angular.module('app.signin', ['app.services'])
 
-.controller('signinController', ['$scope', '$location', 'HttpRequests', function($scope, $location, Signin){
+.controller('signinController', ['$scope', '$location', 'HttpRequests', 'Auth', function($scope, $location, HttpRequests, Auth, signin){
   $scope.user = {
     talents: []
   };
@@ -23,8 +23,7 @@ angular.module('app.signin', ['app.services'])
   };
 
   $scope.signUp = function() {
-    $scope.user.talents = convertTalentsToObject()
-    console.log($scope.user);
+    $scope.user.talents = convertTalentsToObject();
     HttpRequests.signupUser($scope.user) // signupUser returns a promise
       .then(function(response){
         console.log('user posted', response);

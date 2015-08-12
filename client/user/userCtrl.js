@@ -20,13 +20,23 @@ angular.module('app.user', [])
       $scope.requests[index] = 0; // TODO: this should run Requests.makeRequestInactive()
     };
 
-    // HttpRequests.getUser( 'uid' ) // TODO: how to get uid
-    //   .then(function(userData){
-    //     $scope.user = userData;
-    //   },
-    //   function(err){ 
-    //     console.log('error finding user', err);
-    //   });
+    $scope.init = function() {
+      console.log('happening');
+      HttpRequests.getUser( '0123ABC' )
+        .then(function(userData){
+          console.log(userData);
+          $scope.user = userData;
+        },
+        function(err){ 
+          console.log('error finding user', err);
+        });
+    };
+
+    var hi = function(){
+      console.log('hi');
+    };
+
+    hi();
 
     // HttpRequests.getRequests( {name: $routeParams.username})
     //   .then(function(data){
