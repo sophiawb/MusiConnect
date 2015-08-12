@@ -7,26 +7,42 @@ var app = angular.module('app', [
   'ngRoute'
 ]);
 
+app.run(["$rootScope", "$location", function($rootScope, $location) {
+  $rootScope.$on("$routeChangeError", function(event, next, previous, error) {
+    if (error === "AUTH_REQUIRED") {
+      $location.path("/login");
+    }
+  });
+}]);
+
 app.config(function($routeProvider){
+  var requireAuthResolve = {
+    "currentAuth": ["Auth", function(Auth) {
+      return Auth.auth.$requireAuth();
+    }]
+  };
+
   $routeProvider
     .when('/user/:username', { // TODO: how do we grab current user's name
       templateUrl: '/user/userView.html',
-      controller: 'UserController'
+      controller: 'UserController',
+      resolve: requireAuthResolve
     })
     .when('/requests', {
       templateUrl: 'request/requestView.html',
-      controller: 'RequestController'
+      controller: 'RequestController',
+      resolve: requireAuthResolve
     })    
     .when('/signup', {
       templateUrl: 'signin/signup.html',
       controller: 'signinController'
     })    
     .when('/login', {
-      templateUrl: 'request/login.html',
+      templateUrl: 'signin/login.html',
       controller: 'signinContoller'
     })
-    .otherwise({redirectTo: '/user/eliot'}); // should redirect to /user/currentUserName
-
-  });
+    .otherwise({redirectTo: '/user/eliot'
+    }); // should redirect to /user/currentUserName
+});
 
 
