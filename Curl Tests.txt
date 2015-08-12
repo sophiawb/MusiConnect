@@ -1,0 +1,4 @@
+curl http://127.0.0.1:8000/api/user -XPOST -d"name=JaneDoe&username=Janedoe&uid=01234ABC&email=janedoe@gmail.com"
+
+
+curl http://127.0.0.1:8000/api/user --data "name=JaneDoe"
