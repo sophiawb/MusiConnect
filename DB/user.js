@@ -26,18 +26,14 @@ var Request = require('./request');
 
 
 var userSchema = mongoose.Schema({
-  name: { type: String, required: true},
+  // name: { type: String, required: true},
   username: { type: String, required: true, index: { unique: true } },
   uid: { type: String, required: true },
-  password: { type: String },
+  // password: { type: String },
   location: { type: String },
   email: {type: String, index: { unique: true }},
   talents: { type: Object}
 });
-
-userSchema.statics.findAllTalents = function(name, cb){
-  return this.find({'name': name}, cb)
-}
 
 var User = mongoose.model('User', userSchema);
 
