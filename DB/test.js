@@ -3,7 +3,7 @@ var User = require('./user.js');
 /**
  * Testing
 **/
-// removeUser('Patrick');
+removeUser('Johndoe');
 
 var Johndoe =  {
   name: "John Doe",
@@ -15,7 +15,9 @@ var Johndoe =  {
 }
 
 // console.log(patrick);
-// addUser(Johndoe);
+addUser(Johndoe, function(results){
+  console.log(results);
+});
 
 var talents = {
   'Piano': 5,
@@ -74,7 +76,11 @@ var talents = {
 //   console.log(results);
 // })
 
-dbparse.getUID("01234ABC", function(results){
-  // if(err) console.log(err);
-  console.log(results);
-})
+// dbparse.getUID("01234ABC", function(results){
+//   // if(err) console.log(err);
+//   console.log(results);
+// })
+
+// dbparse.getUIDRequests("01234ABC", function(results){
+//   console.log(results);
+// })

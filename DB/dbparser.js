@@ -33,7 +33,7 @@ exports.addUser = addUser = function(userData, callback){
  *          Callback
 **/
 exports.removeUser = removeUser = function(usrname, callback){
-  username = parseUsername(usrname);i
+  username = parseUsername(usrname);
   User.remove({'username': username}, function(err){
     if(err){
       console.log(err);
