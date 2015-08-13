@@ -3,7 +3,7 @@ var bluebird = require('bluebird');
 var User = require('./user');
 
 var requestSchema = mongoose.Schema({
-  requester: { type: String },
+  // requester: { type: String },
   uid: {type: String },
   talent: { type: Object },
   location: { type: String },

@@ -1,6 +1,7 @@
 var db = require('./config');
 var User = require('./user.js');
 var Request = require('./request.js');
+var Event = require('./event.js');
 /**
  *  DBParser file
  *  Purpose of this is to communicate between the frontend and database
@@ -69,13 +70,13 @@ exports.addTalents = addTalents = function(usrname, talents, callback){
   });
 }
 
-/**
+/******************************************************************
  *  Request based stuff
-**/
+*******************************************************************/
 
 //Adds request to database
 exports.addRequest = addRequest = function(requestData, callback){
-  var request = new rRquest(requestData);
+  var request = new Request(requestData);
   request.save(function(err, requestObj){
     if(err) console.log(err)
     else{
@@ -136,6 +137,38 @@ exports.getUIDRequests = getUIDRequests = function(uid, callback){
     else callback(results);
   })
 }
+
+/******************************************************************
+ *  Events based stuff
+*******************************************************************/
+
+exports.addEvent = addEvent = function(eventData, callback){
+  var event = new Event(eventData);
+  event.save(function(err, eventObj){
+    if(err) console.log(err)
+    else{
+      console.log("event successfully added!");
+      callback(eventObj);
+    }
+  });
+}
+
+exports.getEvents = getEvents = function(callback){
+  Event.find(function(err, results){
+    if(err) console.log(err);
+    else callback(results);
+  });
+}
+
+exports.getUIDEvents = getUIDEvents = function(uid, callback){
+  var query = {'uid': uid};
+  Event.find(query, function(err, results){
+    if(err) console.log(err);
+    else callback(results);
+  });
+}
+
+
 
 // var 
 
