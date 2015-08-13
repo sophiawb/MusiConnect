@@ -16,6 +16,17 @@ angular.module('app.services', ['firebase'])
     };
   }])
 
+  .factory('Util', function() {
+    var modifyLink = function(link) {
+      var input = link.substring(23);
+      var output = "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/" + input;
+      //return '"'+output+'"';
+      return output;
+    };
+    return {modifyLink: modifyLink};
+  })
+
+
   .factory('Auth', ['$window', '$firebaseAuth',
     function($window,$firebaseAuth){
 
@@ -73,6 +84,7 @@ angular.module('app.services', ['firebase'])
       };
     }
   ])
+
   .factory('HttpRequests', ['$http', '$location', function($http, $location){
     var hostUrl = 'http://localhost:8000/api';
     

@@ -10,6 +10,13 @@
     </div>
     <input ng-model="newTalent.talent" placeholder="Your talent"> 
     <input ng-model="newTalent.level" placeholder="Your level">
-    <div class="addTalent" ng-click="addTalent()">ADD TALENT</div> 
+    
+    <div class="addTalent" ng-click="addTalent()">ADD TALENT</div>
+  SoundCloud Links: <div class="links" ng-repeat="link in user.links">
+    {{ link }}
+    </div>
+    <input ng-model="newLink" placeholder="Your link">
+    <div class="addLink" ng-click="addLink()">ADD LINK</div>
+
   <input type="submit" value="SIGN UP!!!">
 </form>
