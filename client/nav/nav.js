@@ -1,5 +1,5 @@
 angular.module('app.nav',[])
-.controller('loggedInNavController', ['$scope','$location', function($scope, $location){
+.controller('loggedInNavController', ['$scope','$location','Auth', 'HttpRequests', function($scope, $location, Auth, HttpRequests){
   $scope.showme = false;
   
   $scope.request = {};
@@ -9,11 +9,12 @@ angular.module('app.nav',[])
   };
 
   $scope.sendPostRequest = function(){
+    $scope.request.uid = Auth.getUid();
     HttpRequests.postRequest($scope.request)
-      .then(function(data){
-        console.log('request posted', data);
-      }, function(err){
-        console.log('error posting request', err);
-      });
+    .then(function(data){
+      console.log('request posted', data);
+    }, function(err){
+      console.log('error posting request', err);
+    });
   }
 }]);
