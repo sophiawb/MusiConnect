@@ -1,6 +1,11 @@
 angular.module('app.randomEvent',[])
 .factory('randomEvent', ['HttpRequests', function(HttpRequests){
-  var users = HttpRequests.getAllUsers(); // TODO: add this method to httpRequests
+  var users;
+
+  HttpRequests.getAllUsers()
+    .then(function(err, result){
+      users = result;
+    }); // TODO: add this method to httpRequests
 
   var venues = [{
     location:"The Independent", 

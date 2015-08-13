@@ -103,6 +103,13 @@ angular.module('app.services', ['firebase'])
       });
     }; 
 
+    var getAllUsers = function(){
+      return $http({
+        method: 'GET',
+        url: hostUrl + '/users'
+      });
+    };
+
     var getRequests = function(uid) { // optional filter by username
       var url;
       if (uid) {
@@ -150,6 +157,7 @@ angular.module('app.services', ['firebase'])
       });
     };
 
+
     return {
       loginUser: loginUser,
       signupUser: signupUser,
@@ -157,6 +165,7 @@ angular.module('app.services', ['firebase'])
       getRequests: getRequests,
       postRequest: postRequest,
       postEvent: postEvent,
-      getEvents: getEvents
+      getEvents: getEvents,
+      getAllUsers: getAllUsers
     };
   }]);
