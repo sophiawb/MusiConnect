@@ -32,7 +32,8 @@ var userSchema = mongoose.Schema({
   // password: { type: String },
   location: { type: String },
   email: {type: String, index: { unique: true }},
-  talents: { type: Object}
+  talents: { type: Object},
+  links: { type: Array }
 });
 
 var User = mongoose.model('User', userSchema);
