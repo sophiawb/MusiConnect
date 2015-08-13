@@ -5,7 +5,8 @@ var app = angular.module('app', [
   'app.nav',
   'app.signin',
   'app.event',
-  'ngRoute'
+  'ngRoute',
+  'app.randomEvent'
 ]);
 
 app.run(["$rootScope", "$location", function($rootScope, $location) {
