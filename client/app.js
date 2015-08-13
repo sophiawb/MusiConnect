@@ -16,15 +16,15 @@ app.run(["$rootScope", "$location", function($rootScope, $location) {
 }]);
 
 app.config(function($routeProvider){
+  
   var requireAuthResolve = {
     "currentAuth": ["Auth", function(Auth) {
-      console.log(Auth.auth);
       return Auth.auth.$requireAuth();
     }]
   };
 
   $routeProvider
-    .when('/user/:username', { // TODO: how do we grab current user's name
+    .when('/user/:uid', { // TODO: how do we grab current user's name
       templateUrl: '/user/userView.html',
       controller: 'UserController',
       resolve: requireAuthResolve

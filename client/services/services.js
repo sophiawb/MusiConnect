@@ -23,16 +23,12 @@ angular.module('app.services', ['firebase'])
       var ref = new Firebase(firebaseAppUrl);
       var auth = $firebaseAuth(ref);
 
-      var authData = null;
-      var error = null;
-
       var login = function(email, password){ 
-        return auth.$authWithPassword({// ??
+        return auth.$authWithPassword({
           email: email,
           password: password
-        })
         });
-      };
+    };
 
       var logout = function(){
         auth.$unAuth();
@@ -42,11 +38,7 @@ angular.module('app.services', ['firebase'])
         return auth.$createUser({
           email: email,
           password: password
-        }).then(function(userData){
-          // user created with userData.id
-        }).catch(function(error){
-          console.log("Signup failed:",error);
-        })
+        });
       };
 
       var getUid = function(){
@@ -67,18 +59,17 @@ angular.module('app.services', ['firebase'])
       };
     }
   ])
-
   .factory('HttpRequests', ['$http', '$location', function($http, $location){
     var hostUrl = 'http://localhost:8000/api';
     
-    var signupUser = function(userObject){
+    var signupUser = function(user){
       // send to firebase
       // var uid = UID from firebase
       console.log('user http request sent', JSON.stringify(userObject));
       return $http({
         method: 'POST',
         url: hostUrl + '/user',
-        data: JSON.stringify(userObject),
+        data: JSON.stringify(user),
         headers: {
           'Content-Type': 'application/json'
         }
@@ -92,24 +83,22 @@ angular.module('app.services', ['firebase'])
     };
 
     var getUser = function(uid) {
-      console.log(uid);
       return $http({
         method: 'GET',
-        url: hostUrl + '/user/' + uid, // route will be '/api/users' + uid 
+        url: hostUrl + '/user/' + uid 
       });
-      // .then( set username in localstorage?); 
     }; 
 
     var getRequests = function(uid) { // optional filter by username
       var url;
-      if (!username) {
-        url = hostUrl + 'requests/' + uid;
+      if (uid) {
+        url = hostUrl + '/requests/' + uid;
       } else {
-        url = hostUrl + 'requests';
+        url = hostUrl + '/requests';
       }
       return $http({
         method: 'GET',
-        url: hostUrl + '/request'
+        url: url
       });
     };
 
@@ -118,9 +107,9 @@ angular.module('app.services', ['firebase'])
       return $http({
         method: 'POST',
         url: hostUrl + '/request',
-        data: userObject,
+        data: JSON.stringify(request),
         headers: {
-          'Content-Type': 'text/json'
+          'Content-Type': 'application/json'
         }
       });
     };

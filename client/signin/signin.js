@@ -1,6 +1,6 @@
 angular.module('app.signin', ['app.services'])
 
-.controller('signinController', ['$scope', '$location', 'HttpRequests', 'Auth', function($scope, $location, HttpRequests, Auth, signin){
+.controller('signinController', ['$scope', '$location', 'HttpRequests', 'Auth', '$window', function($scope, $location, HttpRequests, Auth, $window){
   $scope.user = {
     talents: []
   };
@@ -26,6 +26,7 @@ angular.module('app.signin', ['app.services'])
     Auth.login($scope.user.email, $scope.user.password)
     .then(function(authData){
       // login successful with user with ID: authData.uid
+      $window.localStorage.setItem('uid', authData.uid);
       $location.path('/user/'+ authData.uid); // /user/UID
     }).catch(function(error){
       console.error("Firebase login failed:",error);
@@ -34,22 +35,26 @@ angular.module('app.signin', ['app.services'])
   };
 
   $scope.signup = function() {
-    $scope.user.talents = convertTalentsToObject()
-    console.log($scope.user);
+    $scope.user.talents = convertTalentsToObject();
 
     Auth.signup($scope.user.email, $scope.user.password)
     .then(function(userData){
-      $scope.user.uid = userData.uid; // add Firebase uid to the user obj
-      HttpRequests.signupUser($scope.user) // signupUser returns a promise
+      console.log('line 42 signin', userData);
+      $scope.user.uid = userData.uid;
+      HttpRequests.signupUser($scope.user, userData)
       .then(function(response){
+        $window.localStorage.setItem('uid', userData.uid);
         console.log('user posted', response);
-        $location.path('/'); // TODO: where should this lead to?
+        $location.path('/user/'+ userData.uid);
       }, function(error) {
         console.log('error posting user', error);
       }); 
     })
     .catch(function(error){
       console.log("Firebase signup failed:",error);
+    })
+    .catch(function(error){
+      console.log('its an error', error);
     });
   };
 
