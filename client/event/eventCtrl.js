@@ -10,5 +10,11 @@ angular.module('app.event', [])
     $scope.makeRandomEvent = function(){
       HttpRequests.postEvent(randomEvent());
     };
+
+    $scope.getEvents = function(){
+      HttpRequests.getEvents(function(data){
+        $scope.events = data;
+      });
+    }
 }]);
 
