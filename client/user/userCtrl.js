@@ -10,6 +10,10 @@ angular.module('app.user', [])
 
     var init = function() {
       console.log('$routeparams',$routeParams.uid);
+      if ($routeParams.uid === undefined) {
+        console.log('no user id');
+        $location.path('/user/' + $window.localStorage.getItem('uid'));
+      }
       HttpRequests.getUser( $routeParams.uid )
       .then(function(user){
         // if user is null redirect to user's profile

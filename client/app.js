@@ -20,7 +20,7 @@ app.run(["$rootScope", "$location", function($rootScope, $location) {
 app.config(function($routeProvider){
   
   var requireAuthResolve = {
-    "currentAuth": ["Auth", function(Auth) {
+    "currentAuth": [ "Auth", function(Auth) {
       return Auth.auth.$requireAuth();
     }]
   };
@@ -49,7 +49,10 @@ app.config(function($routeProvider){
       templateUrl: 'signin/login.html',
       controller: 'signinController'
     })
-    .otherwise({redirectTo: '/user/eliot'
+    .otherwise({
+      templateUrl: '/user/userView.html',
+      controller: 'UserController',
+      resolve: requireAuthResolve
     }); // should redirect to /user/currentUserName
 });
 
