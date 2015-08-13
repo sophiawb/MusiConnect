@@ -20,7 +20,7 @@ app.get('/api/user/:UID', function(req, res){
   // receive uid
   // return user object
   var UID = req.params.UID;
-  // console.log(req.params.UID);
+  console.log('------------->>>>>>',db.getUID);
   db.getUID(UID, function(userData){
     console.log("26", userData);
     res.end(JSON.stringify(userData));
@@ -48,12 +48,12 @@ app.post('/api/user', function(req, res) {
   });
 });
 
-app.get('/api/requests/:uid', function(req, res){
-  // receive uid
-  // return events under uid
-  var uid = req.params.uid;
+app.get('/api/requests/:UID', function(req, res){
+  // receive UID
+  // return events under UID
+  var UID = req.params.UID;
   // console.log(req.params.UID);
-  db.getUIDRequests(uid, function(requestsData){
+  db.getUIDRequests(UID, function(requestsData){
     console.log("49", requestsData);
     res.end(JSON.stringify(requestsData));
   });
@@ -78,12 +78,12 @@ app.post('/api/request', function(req, res){
   });
 });
 
-app.get('/api/events/:uid', function(req, res){
-  // receive uid
-  // return events under uid
-  var uid = req.params.uid;
+app.get('/api/events/:UID', function(req, res){
+  // receive UID
+  // return events under UID
+  var UID = req.params.UID;
   // console.log(req.params.UID);
-  db.getUIDEvents(uid, function(eventsData){
+  db.getUIDEvents(UID, function(eventsData){
     console.log("79", eventsData);
     res.end(JSON.stringify(eventsData));
   });
