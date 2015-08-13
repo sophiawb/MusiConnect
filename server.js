@@ -20,7 +20,8 @@ app.get('/api/user/:UID', function(req, res){
   // receive uid
   // return user object
   var UID = req.params.UID;
-  // console.log(req.params.UID);
+  console.log('------------->>>>>>',db.getUID);
+
   db.getUID(UID, function(userData){
     console.log("26", userData);
     res.end(JSON.stringify(userData));
@@ -59,7 +60,17 @@ app.post('/api/request', function(req, res){
   });
 });
 
-app.get('/api/events/:uid')
+app.get('/api/requests/:UID', function(req, res){
+  // receive uid
+  // return user object
+  var UID = req.params.UID;
+  // console.log(req.params.UID);
+  db.getUIDRequests(UID, function(requestData){
+    res.end(JSON.stringify(requestData));
+  });
+});
+
+// app.get('/api/events/:uid')
 
 app.get('/api/events', function(req, res){
   // return all events as an object

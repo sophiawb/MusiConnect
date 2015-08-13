@@ -1,7 +1,7 @@
-<div class="navbar">
+<div class="navbar" ng-controller="loggedOutNavController">
   <div class="headercompanyname">banal-conga-line</div>
   <ul class="navlinks">
-    <li>LOGIN</li>
-    <li>LOGOUT</li>
+    <li ng-click="goToLogin()">LOGIN</li>
+    <li ng-click="goToSignup()">SIGNUP</li>
   </ul>
 </div>
