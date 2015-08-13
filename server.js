@@ -1,11 +1,10 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var path = require('path');
-var db = require('./db/dbparser');
+var db = require('./DB/dbparser');
 var morgan      = require('morgan');
 var bodyParser  = require('body-parser');
 
-var dbName = 'banal-conga-line';
 var portNum = 8000;
 
 // Start Express server
@@ -25,7 +24,7 @@ app.get('/api/user/:UID', function(req, res){
   db.getUID(UID, function(userData){
     console.log("26", userData);
     res.end(JSON.stringify(userData));
-  })
+  });
 });
 
 app.post('/api/user', function(req, res) {
@@ -33,11 +32,15 @@ app.post('/api/user', function(req, res) {
   // add it to database
   // respond with 304 - TODO: redirect here or client-side? 
   var userObj = req.body;
+  console.log(req.body);
   // console.log("============================>", req.body);
-  db.addUser(userObj);
+  db.addUser(userObj, function(){
+    console.log('hello');
+    res.end();
+  });
 });
 
-app.get('/api/request', function(req, res){
+app.get('/api/requests', function(req, res){
   // right now get all requests TODO filter requests
   // return object of requests
   db.getRequests(function(requests){
@@ -51,8 +54,29 @@ app.post('/api/request', function(req, res){
   // return post it
   // return 304
   var reqObj = req.body;
-  db.addrequest(reqObj);
+  db.addrequest(reqObj, function(){
+    res.end(200);
+  });
 });
+
+app.get('/api/events/:uid')
+
+app.get('/api/events', function(req, res){
+  // return all events as an object
+  db.getEvents(function(events){
+    res.end(JSON.stringify(events));
+  });
+});
+
+app.post('/api/event', function(req, res){
+  // Receives event obj
+  // attempts to post it
+  // returns if success
+  var eventObj = req.body;
+  db.addEvent(eventObj, function(){
+    res.end(200);
+  });
+})
 
 
 

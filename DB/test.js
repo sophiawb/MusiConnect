@@ -76,11 +76,40 @@ var talents = {
 //   console.log(results);
 // })
 
-dbparse.getUID("simplelogin:19", function(results){
-  // if(err) console.log(err);
-  console.log(results);
-})
+// dbparse.getUID("simplelogin:19", function(results){
+//   // if(err) console.log(err);
+//   console.log(results);
+// })
 
 // dbparse.getUIDRequests("01234ABC", function(results){
+//   console.log(results);
+// })
+
+/**********************************
+ Testing Events
+ **********************************/
+
+var Event1 = {
+  name: "School of Rock",
+  description: "Rock your socks out",
+  location: "School",
+  uid: "0123ABC",
+  hashtag: "#rockout",
+  users: ["Bobby", "Jack", "Black"]
+}
+
+// dbparse.addEvent(Event1, function(results){
+//   console.log(results);
+// });
+
+// dbparse.getEvents(function(results){
+//   console.log(results);
+// });
+
+// dbparse.getRequests(function(results){
+//   console.log(results);
+// })
+
+// dbparse.getUIDEvents('0123ABC', function(results){
 //   console.log(results);
 // })
