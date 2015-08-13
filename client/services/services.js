@@ -32,6 +32,7 @@ angular.module('app.services', ['firebase'])
 
       var logout = function(){
         auth.$unAuth();
+        $window.localStorage.clear();
       };
 
       var signup = function(email, password){
@@ -109,6 +110,18 @@ angular.module('app.services', ['firebase'])
         url: hostUrl + '/request',
         data: JSON.stringify(request),
         headers: {
+          'Content-Type': 'text/json'
+        }
+      });
+    };
+
+    var postEvent = function(ev){
+      console.log('post event http request sent', ev);
+      return $http({
+        method: 'POST',
+        url: hostUrl + '/event',
+        data: ev,
+        headers: {
           'Content-Type': 'application/json'
         }
       });
@@ -119,6 +132,7 @@ angular.module('app.services', ['firebase'])
       signupUser: signupUser,
       getUser: getUser,
       getRequests: getRequests,
-      postRequest: postRequest
+      postRequest: postRequest,
+      postEvent: postEvent
     };
   }]);

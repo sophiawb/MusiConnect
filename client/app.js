@@ -4,6 +4,7 @@ var app = angular.module('app', [
   'app.user',
   'app.nav',
   'app.signin',
+  'app.event',
   'ngRoute'
 ]);
 
@@ -27,13 +28,18 @@ app.config(function($routeProvider){
     .when('/user/:uid', { // TODO: how do we grab current user's name
       templateUrl: '/user/userView.html',
       controller: 'UserController',
-      resolve: requireAuthResolve
+      // resolve: requireAuthResolve
     })
     .when('/requests', {
       templateUrl: 'request/requestView.html',
       controller: 'RequestController',
-      resolve: requireAuthResolve
-    })    
+      // resolve: requireAuthResolve
+    })
+    .when('/events', {
+      templateUrl: 'event/eventView.html',
+      controller: 'EventController',
+      // resolve: requireAuthResolve
+    })
     .when('/signup', {
       templateUrl: 'signin/signup.html',
       controller: 'signinController'

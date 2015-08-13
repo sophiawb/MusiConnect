@@ -2,16 +2,29 @@
   <div class="headercompanyname">banal-conga-line</div>
   <ul class="navlinks">
     <li ng-click="togglePostRequest()">POST REQUEST</li>
-    <li href="/requests">SEARCH REQUESTS</li>
-    <li href="/user">PROFILE</li>
-    <li>LOGOUT</li>
+    <li ng-click="togglePostEvent()">POST EVENT</li>
+    <li ng-click="redirect('requests')">SEARCH REQUESTS</li>
+    <li ng-click="redirect('events')">SEARCH EVENTS</li>
+    <li ng-click="redirect('user')">PROFILE</li>
+    <li ng-click="logout()">LOGOUT</li>
   </ul>
-  <div ng-show="showme">
+  <div ng-show="showRequests">
     Post a new request!!!
-    <form class="postrequestform" ng-submit="sendPostRequest()">
+    <form class="postRequestForm" ng-submit="sendPostRequest()">
       Talent: <input type="text" ng-model="request.talent">
       Level: <input type="text" ng-model="request.level">
       Location: <input type="text" ng-model="request.location">
+      <input type="submit" value="POST IT!!!">
+    </form>
+  </div>
+  <div ng-show="showEvents">
+    Post a new event!!!
+    <form class="postEventForm" ng-submit="sendPostEvent()">
+      Name: <input type="text" ng-model="ev.name">
+      Description: <input type="text" ng-model="ev.description">
+      Location: <input type="text" ng-model="ev.location">
+      Organizer: <input type="text" ng-model="ev.organizer">
+      HashTag: <input type="text" ng-model="ev.hashtag">
       <input type="submit" value="POST IT!!!">
     </form>
   </div>
