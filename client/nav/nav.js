@@ -32,6 +32,7 @@ angular.module('app.nav',[])
   }
 
   $scope.sendPostEvent = function(){
+    $scope.ev.uid = Auth.getUid();
     HttpRequests.postEvent($scope.ev)
       .then(function(data){
         console.log('event posted', data);

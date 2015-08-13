@@ -72,8 +72,9 @@ app.post('/api/request', function(req, res){
   // receive req obj
   // return post it
   // return 304
+  console.log('made it');
   var reqObj = req.body;
-  db.addrequest(reqObj, function(){
+  db.addRequest(reqObj, function(){
     res.end(200);
   });
 });
