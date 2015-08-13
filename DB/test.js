@@ -25,9 +25,9 @@ var talents = {
   'Trumpet': 5
 }
 
-// User.find(function(err, results){
-//   console.log(results);
-// });
+User.findOne({uid: '01234ABC'}, function(err, results){
+  console.log(err, results);
+});
 // 
 // addTalents('Johndoe', talents);
 // removeUser({'username': 'Patrick'});

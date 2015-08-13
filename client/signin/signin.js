@@ -35,28 +35,30 @@ angular.module('app.signin', ['app.services'])
   };
 
   $scope.signup = function() {
-    $scope.user.talents = convertTalentsToObject();
+     $scope.user.talents = convertTalentsToObject();
 
-    Auth.signup($scope.user.email, $scope.user.password)
-    .then(function(userData){
-      console.log('line 42 signin', userData);
-      $scope.user.uid = userData.uid;
-      HttpRequests.signupUser($scope.user, userData)
-      .then(function(response){
-        $window.localStorage.setItem('uid', userData.uid);
-        console.log('user posted', response);
-        $location.path('/user/'+ userData.uid);
-      }, function(error) {
-        console.log('error posting user', error);
-      }); 
-    })
-    .catch(function(error){
-      console.log("Firebase signup failed:",error);
-    })
-    .catch(function(error){
-      console.log('its an error', error);
-    });
-  };
+     var email = $scope.user.email;
+     var password = $scope.user.password;
+
+     Auth.signup(email, password)
+     .then(function(userData){
+       console.log('line 42 signin', userData);
+       $scope.user.uid = userData.uid;
+       HttpRequests.signupUser($scope.user, userData)
+       .then(function(response){
+         $window.localStorage.setItem('uid', userData.uid);
+         console.log('user posted', response);
+         Auth.login(email, password);
+         $location.path('/user/'+ userData.uid);
+       }).catch(function(error) {
+         console.log('error posting user', error);
+         Auth.removeUser(email, password);
+       }); 
+     })
+     .catch(function(error){
+       console.log("Firebase signup failed:",error);
+     });
+   };
 
 
   var convertTalentsToObject = function() {

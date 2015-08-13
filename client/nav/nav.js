@@ -12,10 +12,12 @@ angular.module('app.nav',[])
   };
 
   $scope.togglePostRequest = function(){
+    $scope.showEvents = false;
     $scope.showRequests = !$scope.showRequests;  
   };
 
   $scope.togglePostEvent = function(){
+    $scope.showRequests = false;
     $scope.showEvents = !$scope.showEvents;  
   };
 
@@ -42,5 +44,38 @@ angular.module('app.nav',[])
     Auth.logout();
     $location.path('/login');
   };
+}])
+.controller('loggedOutNavController', ['$scope','$location', 'HttpRequests', 'Auth', function($scope, $location, HttpRequests, Auth){
+    $scope.goToLogin = function() {
+      $location.path('/login');
+    };
+
+    $scope.goToSignup = function() {
+      $location.path('/signup');
+    };
 
 }]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -28,10 +28,11 @@ angular.module('app.services', ['firebase'])
           email: email,
           password: password
         });
-    };
+      };
 
       var logout = function(){
-        auth.$unAuth();
+        console.log(auth);
+        auth.$unauth();
         $window.localStorage.clear();
       };
 
@@ -39,6 +40,17 @@ angular.module('app.services', ['firebase'])
         return auth.$createUser({
           email: email,
           password: password
+        });
+      };
+
+      var removeUser = function(email, password){
+        auth.$removeUser({
+          email: email,
+          password: password
+        }).then(function() {
+          console.log("User removed");
+        }).catch(function(error) {
+          console.log("Error removing user");
         });
       };
 
@@ -55,6 +67,7 @@ angular.module('app.services', ['firebase'])
         login: login,
         logout: logout,
         signup: signup,
+        removeUser, removeUser,
         getUid: getUid,
         isAuth: isAuth
       };
@@ -66,7 +79,7 @@ angular.module('app.services', ['firebase'])
     var signupUser = function(user){
       // send to firebase
       // var uid = UID from firebase
-      console.log('user http request sent', JSON.stringify(userObject));
+      console.log('user http request sent', JSON.stringify(user));
       return $http({
         method: 'POST',
         url: hostUrl + '/user',
