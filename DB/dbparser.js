@@ -56,6 +56,13 @@ exports.getUID = getUID = function(uid, callback){
   });
 };
 
+exports.getUsers = getUsers = function(callback){
+  User.find(function(err, results){
+    if(err) console.log(err);
+    else callback(results);
+  });
+};
+
 
 /**
  *  Function: addTalents
