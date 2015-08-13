@@ -1,13 +1,18 @@
 angular.module('app.user', [])
-.controller('UserController',['$scope', '$location', '$window','$routeParams', 'HttpRequests',
-  function($scope, $location, $window, $routeParams, HttpRequests){
+.controller('UserController',['$sce', '$scope', '$location', '$window','$routeParams', 'HttpRequests', 'Util',
+  function($sce, $scope, $location, $window, $routeParams, HttpRequests, Util){
     $scope.user = {};
+    $scope.modifyLink = Util.modifyLink;
 
+    $scope.trustSrc = function(src) {
+      return $sce.trustAsResourceUrl(src);
+    };
+  
     $scope.deleteRequest = function(index) {
       HttpRequests.makeRequestInactive($scope.requests[index]._id);
       $scope.requests[index] = 0; // TODO: this should run Requests.makeRequestInactive()
     };
-
+    
     var init = function() {
       
       if ($routeParams.uid === undefined) {
@@ -39,11 +44,11 @@ angular.module('app.user', [])
 
     init();
 
-    HttpRequests.getRequests( {name: $routeParams.username})
-      .then(function(data){
-        console.log('received requests', data);
-        $scope.requests = data;
-      }, function(err){
-        console.log('error getting requests', err);
-      });
+    // HttpRequests.getRequests( {name: $routeParams.username})
+    //   .then(function(data){
+    //     console.log('received requests', data);
+    //     $scope.requests = data;
+    //   }, function(err){
+    //     console.log('error getting requests', err);
+    //   });
 }]);

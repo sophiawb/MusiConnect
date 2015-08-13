@@ -10,6 +10,13 @@
 </div>
 <div class="email"> {{ user.email }} </div>
 
+<h1> Links </h1>
+<div class="linklist" ng-repeat="link in user.links"> 
+  <div class="link">
+    <iframe ng-src="{{trustSrc(modifyLink(link))}}"></iframe>
+  </div>
+</div>
+
 <h1> Requests </h1>
 <div class="requestlist" ng-repeat="request in requests track by $index">
   <div class="talent"> {{ request.talent }}</div>

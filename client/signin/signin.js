@@ -2,7 +2,8 @@ angular.module('app.signin', ['app.services'])
 
 .controller('signinController', ['$scope', '$location', 'HttpRequests', 'Auth', '$window', function($scope, $location, HttpRequests, Auth, $window){
   $scope.user = {
-    talents: []
+    talents: [],
+    links: []
   };
 
   $scope.newTalent = {};
@@ -14,10 +15,18 @@ angular.module('app.signin', ['app.services'])
         talent: $scope.newTalent.talent,
         level: $scope.newTalent.level
       });
-    $scope.newTalent.talent = "";
-    $scope.newTalent.level = "";
+      $scope.newTalent.talent = "";
+      $scope.newTalent.level = "";
+    } else {
+      // TODO: add a message that one of the forms is blank
     }
-    else {
+  };
+
+  $scope.addLink = function(){
+    if ($scope.newLink !== "") {
+      $scope.user.links.push($scope.newLink);
+      $scope.newLink = "";
+    } else {
       // TODO: add a message that one of the forms is blank
     }
   };
